@@ -1,0 +1,29 @@
+# Node modules (frontend)
+node_modules/
+
+# Build output
+dist/
+build/
+
+# Logs
+*.log
+
+# Python cache and virtual environment
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+env/
+venv/
+
+# Environment variables
+backend/
+.env
+
+# IDE or OS-specific files
+.DS_Store
+.vscode/
+.idea/
+
+# Database or local secrets
+*.db
