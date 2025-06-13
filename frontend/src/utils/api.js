@@ -22,8 +22,9 @@ export const loginUser = async (data) => {
   return res.json();
 };
 
-export const addToCart = async (item, token) => {
-  const res = await fetch(`${API_URL}/cart`, {
+export async function addToCart(item) {
+  const token = localStorage.getItem("token");
+  const response = await fetch("http://localhost:8000/api/cart", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -31,5 +32,7 @@ export const addToCart = async (item, token) => {
     },
     body: JSON.stringify(item),
   });
-  return res.json();
-};
+
+  if (!response.ok) throw new Error("Failed to add to cart");
+  return await response.json();
+}
