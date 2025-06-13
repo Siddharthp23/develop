@@ -1,6 +1,4 @@
-import React from "react";
 import beardoBanner from "../assets/ma1.jpg"; // Save your banner image here
-import beardoOffer from "../assets/ma1.jpg";   // Save your offer image here
 
 export default function Hero() {
   return (

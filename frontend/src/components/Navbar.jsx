@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { FaSearch, FaMicrophone, FaShoppingCart } from "react-icons/fa";
 import logo from "../assets/Logo.png";
-// import "./Navbar.css"; // Make sure to style your modals here
 
 export default function Navbar() {
   const [showLogin, setShowLogin] = useState(false);
@@ -17,61 +16,65 @@ export default function Navbar() {
     setLoginPassword("");
   };
 
-  const handleLogin = async () => {
-    try {
-      const response = await fetch("http://localhost:8000/api/auth/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email: loginEmail,
-          password: loginPassword,
-        }),
-      });
-
-      const data = await response.json();
-      if (response.ok) {
-        alert("Login successful!");
-        closeModals();
-      } else {
-        alert(data.detail || "Login failed");
-      }
-    } catch (err) {
-      console.error("Login error:", err);
-      alert("Something went wrong!");
-    }
-  };
-
   const [registerData, setRegisterData] = useState({
   name: "",
   email: "",
   password: "",
 });
 
-const handleRegister = async () => {
+
+  const handleLogin = async () => {
   try {
-    const response = await fetch("http://localhost:8000/api/auth/register", {
+    const response = await fetch("http://localhost:8000/api/auth/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(registerData),
+      body: JSON.stringify({
+        email: loginEmail,
+        password: loginPassword,
+      }),
     });
 
     const data = await response.json();
     if (response.ok) {
-      alert("Registration successful!");
+      localStorage.setItem("token", data.access_token);
+      localStorage.setItem("user", JSON.stringify(data.user)); // 👈 Save user info
+      alert("Login successful!");
       closeModals();
+      window.location.reload(); // Refresh to show user name
     } else {
-      alert(`Registration failed: ${data.detail || "Unknown error"}`);
+      alert(data.detail || "Login failed");
     }
-  } catch (error) {
-    console.error("Registration error:", error);
-    alert("Server error during registration.");
+  } catch (err) {
+    console.error("Login error:", err);
+    alert("Something went wrong!");
   }
 };
 
+
+  const handleRegister = async () => {
+    try {
+      const response = await fetch("http://localhost:8000/api/auth/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(registerData),
+      });
+
+      const data = await response.json();
+      if (response.ok) {
+        alert("Registration successful!");
+        closeModals();
+      } else {
+        alert(`Registration failed: ${data.detail || "Unknown error"}`);
+      }
+    } catch (error) {
+      console.error("Registration error:", error);
+      alert("Server error during registration.");
+    }
+  };
 
   return (
     <>

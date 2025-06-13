@@ -1,4 +1,3 @@
-import React from "react";
 import ProductList from "./ProductList"; // renders multiple <ProductCard />
 import OrderSummary from "./OrderSummary";
 

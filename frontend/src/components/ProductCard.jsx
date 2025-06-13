@@ -1,4 +1,3 @@
-import React from "react";
 import { FaShoppingBag } from "react-icons/fa";
 
 export default function ProductCard({ image, name, price }) {

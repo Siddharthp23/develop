@@ -1,4 +1,3 @@
-import React from "react";
 import ProductCard from "./ProductCard";
 import product1 from "../assets/trimmer.webp";
 import product2 from "../assets/sports.webp";

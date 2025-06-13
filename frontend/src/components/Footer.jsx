@@ -1,4 +1,3 @@
-import React from "react";
 import visa from "../assets/visa_icon.png";
 import paypal from "../assets/paypal.png";
 //import "./Footer.css";

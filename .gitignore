@@ -17,7 +17,7 @@ env/
 venv/
 
 # Environment variables
-backend/
+#backend/
 .env
 
 # IDE or OS-specific files

@@ -1,23 +1,38 @@
-// File: src/App.jsx
-import React from "react";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
-import ProductList from "./components/ProductList";
-import OrderSummary from "./components/OrderSummary";
 import Footer from "./components/Footer";
-import MainContent from "./components/MainContent";
+
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import Cart from "./pages/Cart";
+import MainContent from "./components/MainContent"; // acts as Home
 import "./index.css";
 
 function App() {
+  const token = localStorage.getItem("token");
+
   return (
-    <div className="app">
-      <Navbar />
-      <Hero />
-      <div className="main-section">
-        <MainContent/>
+    <Router>
+      <div className="app">
+        <Navbar />
+        <Hero />
+
+        <div className="main-section">
+          <Routes>
+            <Route path="/" element={<MainContent />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route
+              path="/cart"
+              element={token ? <Cart /> : <Navigate to="/login" />}
+            />
+          </Routes>
+        </div>
+
+        <Footer />
       </div>
-      <Footer />
-    </div>
+    </Router>
   );
 }
 
